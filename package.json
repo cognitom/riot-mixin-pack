@@ -1,0 +1,45 @@
+{
+  "name": "riot-mixin-pack",
+  "version": "0.1.0",
+  "description": "Useful mixin pack for Riot.js",
+  "main": "dist/riot-mixin-pack.cjs.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "npm run eslint && npm run karma",
+    "prepublish": "npm run build",
+    "build": "rollup -c && rollup -c rollup.config.cjs.js",
+    "watch": "chokidar '*.js' -c 'npm run build'",
+    "eslint": "eslint -c ./.eslintrc *.js",
+    "karma": "karma start test/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cognitom/riot-mixin-pack.git"
+  },
+  "keywords": [
+    "riot"
+  ],
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.0.0",
+    "chokidar-cli": "^1.2.0",
+    "eslint": "^1.10.3",
+    "expect.js": "^0.3.1",
+    "karma": "^0.13.19",
+    "karma-mocha": "^0.2.1",
+    "karma-mocha-reporter": "^1.1.5",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "mocha": "^2.3.4",
+    "phantomjs": "^1.9.19",
+    "riot": "^2.3.13",
+    "rollup": "^0.24.0",
+    "rollup-plugin-babel": "^2.3.8",
+    "uglify-js": "^2.6.1"
+  },
+  "author": "Tsutomu Kawamura",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cognitom/riot-mixin-pack/issues"
+  },
+  "homepage": "https://github.com/cognitom/riot-mixin-pack#readme"
+}
