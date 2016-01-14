@@ -15,5 +15,6 @@ export default {
       /** dispatch an event */
       this.root.dispatchEvent(e)
     }, 0)
+    return this // return this for method chain
   }
 }

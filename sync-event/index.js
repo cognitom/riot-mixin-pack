@@ -11,5 +11,6 @@ export default {
   /** Skip sync event once */
   skipSync: function() {
     this._shouldSyncFromOpts = false
+    return this // return this for method chain
   }
 }

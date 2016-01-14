@@ -10,8 +10,7 @@ import { domEvent, syncEvent } from 'riot-mixin-pack'
 <input-text>
   <input type="text" value={ value } onchange={ change }>
   <script>
-    this.mixin(domEvent)
-    this.mixin(syncEvent)
+    this.mixin(domEvent).mixin(syncEvent)
     change (e) {
       e.stopPropagation()
       this.root.value = this.value = e.target.value

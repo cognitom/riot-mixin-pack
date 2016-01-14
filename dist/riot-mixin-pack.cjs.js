@@ -41,6 +41,7 @@ var syncEvent = {
   /** Skip sync event once */
   skipSync: function skipSync() {
     this._shouldSyncFromOpts = false;
+    return this; // return this for method chain
   }
 };
 
@@ -65,6 +66,7 @@ var domEvent = {
       /** dispatch an event */
       _this.root.dispatchEvent(e);
     }, 0);
+    return this; // return this for method chain
   }
 };
 
