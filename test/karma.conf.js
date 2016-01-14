@@ -13,7 +13,7 @@ module.exports = function(config) {
       '../node_modules/riot/riot.js',
       '../dist/riot-mixin-pack.js',
       'specs/dom-event.js',
-      'specs/sync-opts.js',
+      'specs/sync-event.js',
       'specs/parent-scope.js'
     ],
     browsers: ['PhantomJS'],

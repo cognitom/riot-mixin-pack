@@ -1,5 +1,5 @@
 import domEvent from './dom-event'
-import syncOpts from './sync-opts'
+import syncEvent from './sync-event'
 import parentScope from './parent-scope'
 
-export { domEvent, syncOpts, parentScope }
+export { domEvent, syncEvent, parentScope }
