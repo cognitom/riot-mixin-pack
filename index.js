@@ -1,5 +1,5 @@
-import domEvent from './dom-event'
-import syncEvent from './sync-event'
-import parentScope from './parent-scope'
+import domEvent from './dom-event/index'
+import syncEvent from './sync-event/index'
+import parentScope from './parent-scope/index'
 
 export { domEvent, syncEvent, parentScope }

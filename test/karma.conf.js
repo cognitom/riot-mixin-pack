@@ -12,9 +12,9 @@ module.exports = function(config) {
       '../node_modules/expect.js/index.js',
       '../node_modules/riot/riot.js',
       '../dist/riot-mixin-pack.js',
-      'specs/dom-event.js',
-      'specs/sync-event.js',
-      'specs/parent-scope.js'
+      '../dom-event/spec.js',
+      '../sync-event/spec.js',
+      '../parent-scope/spec.js'
     ],
     browsers: ['PhantomJS'],
     reporters: ['mocha'],

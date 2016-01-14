@@ -1,4 +1,4 @@
-describe('optsSync', function() {
+describe('syncEvent', function() {
 
   it('sync opts', function() {
     // TODO: create test

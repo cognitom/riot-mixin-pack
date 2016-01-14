@@ -27,7 +27,7 @@
     }
   };
 
-  var syncOpts = {
+  var syncEvent = {
     /** Init mixin on each tag */
     init: function init() {
       var _this = this;
@@ -70,7 +70,7 @@
   };
 
   exports.domEvent = domEvent;
-  exports.syncOpts = syncOpts;
+  exports.syncEvent = syncEvent;
   exports.parentScope = parentScope;
 
 }((this.riotMixinPack = {})));
