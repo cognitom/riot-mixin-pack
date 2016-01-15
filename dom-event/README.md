@@ -26,7 +26,7 @@ import { domEvent, syncEvent } from 'riot-mixin-pack'
 
 ## Custom events
 
-We can trigger the name as we like. But be aware that nobody listen it at default. For example:
+We can trigger names as we like. But be aware that nobody listens them at default. For example:
 
 ```html
 <my-tag onpush={ doSomething } />
@@ -48,7 +48,7 @@ this.triggerDomEvent('click')
 
 In this case above, syntax is the same, but all HTML tags have `onclick` event handlers at default, so `doSomethig()` will be called as we expect.
 
-The next example will also work:
+It needs to use `addEventListener` for custom named events:
 
 ```html
 <my-tag name="first" />
