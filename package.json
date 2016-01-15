@@ -1,6 +1,6 @@
 {
   "name": "riot-mixin-pack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Useful mixin pack for Riot.js",
   "jsnext:main": "dist/riot-mixin-pack.es6.js",
   "main": "dist/riot-mixin-pack.cjs.js",
