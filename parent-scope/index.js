@@ -1,3 +1,13 @@
+function hook(p, key) {
+  let h = e => {
+    e.preventUpdate = true
+    p[key](e)
+    p.update()
+  }
+  h._inherited = true
+  return h
+}
+
 export default {
   /**
    * Inject properties from parents
@@ -11,32 +21,16 @@ export default {
       Object.getOwnPropertyNames(this.parent)
         .filter(key => !~this._ownPropKeys.indexOf(key))
         .forEach(key => {
-          if (typeof this.parent[key] != 'function' || this.parent[key]._inherited) {
-            this[key] = this.parent[key]
-          } else {
-            const hook = p => e => {
-              e.preventUpdate = true
-              p[key](e)
-              p.update()
-            }
-            this[key] = hook(this.parent)
-            this[key]._inherited = true
-          }
+          this[key] = typeof this.parent[key] != 'function' || this.parent[key]._inherited
+            ? this.parent[key]
+            : hook(this.parent, key)
         })
       Object.getOwnPropertyNames(this.parent.opts)
         .filter(key => !~this._ownOptsKeys.indexOf(key))
         .forEach(key => {
-          if (typeof this.parent.opts[key] != 'function' || this.parent.opts[key]._inherited) {
-            this.opts[key] = this.parent.opts[key]
-          } else {
-            const hook = p => e => {
-              e.preventUpdate = true
-              p[key](e)
-              p.update()
-            }
-            this.opts[key] = hook(this.parent)
-            this.opts[key]._inherited = true
-          }
+          this.opts[key] = typeof this.parent.opts[key] != 'function' || this.parent.opts[key]._inherited
+            ? this.parent.opts[key]
+            : hook(this.parent, key)
         })
     })
   }

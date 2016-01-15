@@ -1,5 +1,15 @@
 'use strict';
 
+function hook(p, key) {
+  var h = function h(e) {
+    e.preventUpdate = true;
+    p[key](e);
+    p.update();
+  };
+  h._inherited = true;
+  return h;
+}
+
 var parentScope = {
   /**
    * Inject properties from parents
@@ -15,36 +25,12 @@ var parentScope = {
       Object.getOwnPropertyNames(_this.parent).filter(function (key) {
         return ! ~_this._ownPropKeys.indexOf(key);
       }).forEach(function (key) {
-        if (typeof _this.parent[key] != 'function' || _this.parent[key]._inherited) {
-          _this[key] = _this.parent[key];
-        } else {
-          var hook = function hook(p) {
-            return function (e) {
-              e.preventUpdate = true;
-              p[key](e);
-              p.update();
-            };
-          };
-          _this[key] = hook(_this.parent);
-          _this[key]._inherited = true;
-        }
+        _this[key] = typeof _this.parent[key] != 'function' || _this.parent[key]._inherited ? _this.parent[key] : hook(_this.parent, key);
       });
       Object.getOwnPropertyNames(_this.parent.opts).filter(function (key) {
         return ! ~_this._ownOptsKeys.indexOf(key);
       }).forEach(function (key) {
-        if (typeof _this.parent.opts[key] != 'function' || _this.parent.opts[key]._inherited) {
-          _this.opts[key] = _this.parent.opts[key];
-        } else {
-          var hook = function hook(p) {
-            return function (e) {
-              e.preventUpdate = true;
-              p[key](e);
-              p.update();
-            };
-          };
-          _this.opts[key] = hook(_this.parent);
-          _this.opts[key]._inherited = true;
-        }
+        _this.opts[key] = typeof _this.parent.opts[key] != 'function' || _this.parent.opts[key]._inherited ? _this.parent.opts[key] : hook(_this.parent, key);
       });
     });
   }
