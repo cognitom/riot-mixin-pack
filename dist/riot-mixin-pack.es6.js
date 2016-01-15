@@ -1,5 +1,3 @@
-'use strict';
-
 var parentScope = {
   /**
    * Inject properties from parents
@@ -70,6 +68,4 @@ var domEvent = {
   }
 };
 
-exports.domEvent = domEvent;
-exports.syncEvent = syncEvent;
-exports.parentScope = parentScope;
+export { domEvent, syncEvent, parentScope };

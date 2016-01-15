@@ -1,5 +1,4 @@
-(function (exports) {
-  'use strict';
+define(['exports'], function (exports) { 'use strict';
 
   var parentScope = {
     /**
@@ -75,4 +74,4 @@
   exports.syncEvent = syncEvent;
   exports.parentScope = parentScope;
 
-}((this.riotMixinPack = {})));
+});

@@ -3,7 +3,7 @@ export default {
    * Inject properties from parents
    */
   init: function() {
-    this.on('mount', () => {
+    this.one('update', () => {
       this._ownPropKeys = Object.getOwnPropertyNames(this)
       this._ownOptsKeys = Object.getOwnPropertyNames(this.opts)
     })
