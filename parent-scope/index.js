@@ -13,10 +13,12 @@ export default {
    * Inject properties from parents
    */
   init: function() {
+    /** Store the keys originally belonging to the tag */
     this.one('update', () => {
       this._ownPropKeys = Object.getOwnPropertyNames(this)
       this._ownOptsKeys = Object.getOwnPropertyNames(this.opts)
     })
+    /** Inherit the properties from parents on each update */
     this.on('update', () => {
       Object.getOwnPropertyNames(this.parent)
         .filter(key => !~this._ownPropKeys.indexOf(key))
