@@ -4,3 +4,5 @@ Basically we can update the tag properties on `update` event, but sometimes this
 
 - `this.on('sync', () => { /* */ })`: fired in `update` event
 - `this.skipSync()`: skip next `sync` event
+
+See more details on [domEvent](../dom-event/).
