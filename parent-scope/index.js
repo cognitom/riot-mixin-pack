@@ -1,8 +1,12 @@
+/** Call original method and update automatically */
 function hook(p, key) {
   let h = e => {
+    // suppress updating on the inherit tag
     e.preventUpdate = true
+    // call original method
     p[key](e)
-    p.update()
+    // update only when the argument is an Event object
+    if (e instanceof Event) p.update()
   }
   h._inherited = true
   return h
