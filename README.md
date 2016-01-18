@@ -1,3 +1,8 @@
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+
 # Riot Mixin Pack
 
 This is a series of mixins which make Riot.js more convenient.
@@ -50,3 +55,14 @@ Some note:
 - `index.js` should be written in ES6.
 - `spec.js` and `spec.tag` should be written in ES5.
 - In `spec.tag`, all tags has the prefix. For example: `<sync-event-app>` `<sync-event-child>` for syncEvent mixin.
+
+
+[travis-image]:https://img.shields.io/travis/cognitom/riot-mixin-pack.svg?style=flat-square
+[travis-url]:https://travis-ci.org/cognitom/riot-mixin-pack
+
+[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]:LICENSE.txt
+
+[npm-version-image]:http://img.shields.io/npm/v/riot-mixin-pack.svg?style=flat-square
+[npm-downloads-image]:http://img.shields.io/npm/dm/riot-mixin-pack.svg?style=flat-square
+[npm-url]:https://npmjs.org/package/riot-mixin-pack
