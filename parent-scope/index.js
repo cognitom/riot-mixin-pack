@@ -1,12 +1,24 @@
+/** Return all property names */
+function getAllPropertyNames(obj) {
+  let arr = []
+  for (let key in obj) arr.push(key)
+  return arr
+}
+
 /** Call original method and update automatically */
 function hook(p, key) {
   let h = e => {
-    // call original method
-    p[key](e)
     // update only when the argument is an Event object
-    if (e instanceof Event) p.update()
-    // suppress updating on the inherit tag
-    else e.preventUpdate = true
+    if (e && e instanceof Event) {
+      // suppress updating on the inherit tag
+      e.preventUpdate = true
+      // call original method
+      p[key](e)
+      // update automatically
+      p.update()
+    } else {
+      p[key](e)
+    }
   }
   h._inherited = true
   return h
@@ -19,20 +31,20 @@ export default {
   init: function() {
     /** Store the keys originally belonging to the tag */
     this.one('update', () => {
-      this._ownPropKeys = Object.keys(this)
-      this._ownOptsKeys = Object.keys(this.opts)
+      this._ownPropKeys = getAllPropertyNames(this)
+      this._ownOptsKeys = getAllPropertyNames(this.opts)
     })
     /** Inherit the properties from parents on each update */
     this.on('update', () => {
-      Object.keys(this.parent)
-        .filter(key => !~this._ownPropKeys.indexOf(key))
+      getAllPropertyNames(this.parent)
+        .filter(key => !~this._ownPropKeys.indexOf(key) && key != 'opts')
         .forEach(key => {
           this[key] = typeof this.parent[key] != 'function' || this.parent[key]._inherited
             ? this.parent[key]
             : hook(this.parent, key)
         })
-      Object.keys(this.parent.opts)
-        .filter(key => !~this._ownOptsKeys.indexOf(key))
+      getAllPropertyNames(this.parent.opts)
+        .filter(key => !~this._ownOptsKeys.indexOf(key) && key != 'riotTag')
         .forEach(key => {
           this.opts[key] = typeof this.parent.opts[key] != 'function' || this.parent.opts[key]._inherited
             ? this.parent.opts[key]
