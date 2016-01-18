@@ -1,8 +1,12 @@
+/** Call original method and update automatically */
 function hook(p, key) {
   var h = function h(e) {
-    e.preventUpdate = true;
+    // call original method
     p[key](e);
-    p.update();
+    // update only when the argument is an Event object
+    if (e instanceof Event) p.update();
+    // suppress updating on the inherit tag
+    else e.preventUpdate = true;
   };
   h._inherited = true;
   return h;
@@ -15,17 +19,19 @@ var parentScope = {
   init: function init() {
     var _this = this;
 
+    /** Store the keys originally belonging to the tag */
     this.one('update', function () {
-      _this._ownPropKeys = Object.getOwnPropertyNames(_this);
-      _this._ownOptsKeys = Object.getOwnPropertyNames(_this.opts);
+      _this._ownPropKeys = Object.keys(_this);
+      _this._ownOptsKeys = Object.keys(_this.opts);
     });
+    /** Inherit the properties from parents on each update */
     this.on('update', function () {
-      Object.getOwnPropertyNames(_this.parent).filter(function (key) {
+      Object.keys(_this.parent).filter(function (key) {
         return ! ~_this._ownPropKeys.indexOf(key);
       }).forEach(function (key) {
         _this[key] = typeof _this.parent[key] != 'function' || _this.parent[key]._inherited ? _this.parent[key] : hook(_this.parent, key);
       });
-      Object.getOwnPropertyNames(_this.parent.opts).filter(function (key) {
+      Object.keys(_this.parent.opts).filter(function (key) {
         return ! ~_this._ownOptsKeys.indexOf(key);
       }).forEach(function (key) {
         _this.opts[key] = typeof _this.parent.opts[key] != 'function' || _this.parent.opts[key]._inherited ? _this.parent.opts[key] : hook(_this.parent, key);
