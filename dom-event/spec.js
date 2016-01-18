@@ -14,7 +14,7 @@ describe('domEvent', function() {
 
   it('domEvent triggered', function(done) {
     app = riot.mount(appDom, 'dom-event-1')[0]
-    tag = app.tags['dom-event-2']
+    var tag = app.tags['dom-event-2']
 
     tag.triggerClick()
     setTimeout(function() {
