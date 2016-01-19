@@ -41,8 +41,13 @@ var parentScope = {
     });
     /** Inherit the properties from parents on each update */
     this.on('update', function () {
-      getAllPropertyNames(_this.parent).filter(function (key) {
-        return ! ~_this._ownPropKeys.indexOf(key) && key != 'opts';
+      getAllPropertyNames(_this.parent)
+      // TODO: Needs to remove ` && key != 'triggerDomEvent'`
+      //   Skipping 'triggerDomEvent' is a temporal workaround.
+      //   In some cases function on the child is overrode.
+      //   This issue needs more study...
+      .filter(function (key) {
+        return ! ~_this._ownPropKeys.indexOf(key) && key != 'triggerDomEvent';
       }).forEach(function (key) {
         _this[key] = typeof _this.parent[key] != 'function' || _this.parent[key]._inherited ? _this.parent[key] : hook(_this.parent, key);
       });

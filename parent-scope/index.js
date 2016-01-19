@@ -37,7 +37,11 @@ export default {
     /** Inherit the properties from parents on each update */
     this.on('update', () => {
       getAllPropertyNames(this.parent)
-        .filter(key => !~this._ownPropKeys.indexOf(key) && key != 'opts')
+        // TODO: Needs to remove ` && key != 'triggerDomEvent'`
+        //   Skipping 'triggerDomEvent' is a temporal workaround.
+        //   In some cases function on the child is overrode.
+        //   This issue needs more study...
+        .filter(key => !~this._ownPropKeys.indexOf(key) && key != 'triggerDomEvent')
         .forEach(key => {
           this[key] = typeof this.parent[key] != 'function' || this.parent[key]._inherited
             ? this.parent[key]
