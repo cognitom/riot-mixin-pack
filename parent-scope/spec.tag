@@ -3,15 +3,22 @@
   <script>
     var self = this
     self.strProp = 'A'
+    self.counter = 0
     funcProp (e) {
       self.counter++
     }
-    console.log(opts)
   </script>
 </parent-scope-1>
 
 <parent-scope-2>
   <p><yield/></p>
+  <script>
+    var self = this
+    self.counter2 = 0
+    self.one('update', function() {
+      self.counter2++
+    })
+  </script>
 </parent-scope-2>
 
 <parent-scope-3>
@@ -25,6 +32,9 @@
     funcProp (e) {
       self.counter++
     }
+    sameNameFunc (e) {
+      self.counter++
+    }
   </script>
 </parent-scope-3>
 
@@ -33,6 +43,9 @@
   <script>
     var self = this
     self.mixin(riotMixinPack.parentScope)
+    sameNameFunc (e) {
+      // do nothing
+    }
   </script>
 </parent-scope-4>
 
@@ -47,6 +60,9 @@
     self.strProp = 'A'
     self.objProp = { a: 1, b: 2 }
     funcProp (e) {
+      self.counter++
+    }
+    sameNameFunc (e) {
       self.counter++
     }
   </script>

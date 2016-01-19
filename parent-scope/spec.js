@@ -23,6 +23,11 @@ describe('parentScope', function() {
 
     expect(tag._ownPropKeys).to.be(undefined)
     expect(tag._ownOptsKeys).to.be(undefined)
+
+    // `one` should watch the event only once
+    expect(tag.counter2).to.be(1)
+    app.update({ strProp: 'C' })
+    expect(tag.counter2).to.be(1)
   })
 
   describe('nest-level 1', function() {
@@ -52,6 +57,26 @@ describe('parentScope', function() {
       tags[0].funcProp()
       expect(app.counter).to.be(1)
     })
+
+    it('no override same name func', function() {
+      app = riot.mount(appDom, 'parent-scope-3')[0]
+      var tags = app.tags['parent-scope-4']
+
+      expect(tags[0].sameNameFunc._inherited).to.be(undefined)
+      tags[0].sameNameFunc()
+      expect(app.counter).to.be(0)
+    })
+
+    it('no override same name func after update', function() {
+      app = riot.mount(appDom, 'parent-scope-3')[0]
+      var tags = app.tags['parent-scope-4']
+
+      app.update()
+      tags[0].update()
+      expect(tags[0].sameNameFunc._inherited).to.be(undefined)
+      tags[0].sameNameFunc()
+      expect(app.counter).to.be(0)
+    })
   })
 
   describe('nest-level 2', function() {
@@ -80,6 +105,26 @@ describe('parentScope', function() {
 
       tags[0].funcProp()
       expect(app.counter).to.be(1)
+    })
+
+    it('no override same name func', function() {
+      app = riot.mount(appDom, 'parent-scope-5')[0]
+      var tags = app.tags['parent-scope-4'].tags['parent-scope-4']
+
+      expect(tags[0].sameNameFunc._inherited).to.be(undefined)
+      tags[0].sameNameFunc()
+      expect(app.counter).to.be(0)
+    })
+
+    it('no override same name func after update', function() {
+      app = riot.mount(appDom, 'parent-scope-5')[0]
+      var tags = app.tags['parent-scope-4'].tags['parent-scope-4']
+
+      app.update()
+      tags[0].update()
+      expect(tags[0].sameNameFunc._inherited).to.be(undefined)
+      tags[0].sameNameFunc()
+      expect(app.counter).to.be(0)
     })
   })
 
