@@ -2,6 +2,9 @@
   "name": "riot-mixin-pack",
   "version": "0.1.7",
   "description": "Useful mixin pack for Riot.js",
+  "files": [
+    "dist"
+  ],
   "jsnext:main": "dist/riot-mixin-pack.es6.js",
   "main": "dist/riot-mixin-pack.cjs.js",
   "browser": "dist/riot-mixin-pack.amd.js",
