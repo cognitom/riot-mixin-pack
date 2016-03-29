@@ -1,7 +1,7 @@
 const
   rollup       = require('rollup'),
   babel        = require('rollup-plugin-babel'),
-  npm          = require('rollup-plugin-npm'),
+  resolve      = require('rollup-plugin-node-resolve'),
   commonjs     = require('rollup-plugin-commonjs'),
   changeCase   = require('change-case'),
   packageName  = require('./package.json').name
@@ -9,7 +9,7 @@ const
 rollup
   .rollup({
     entry: 'index.js',
-    plugins: [npm({ jsnext: true }), commonjs(), babel()]
+    plugins: [resolve({ jsnext: true }), commonjs(), babel()]
   })
   .then(bundle => {
     bundle.write({
