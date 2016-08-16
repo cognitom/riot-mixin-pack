@@ -1,6 +1,6 @@
 {
   "name": "riot-mixin-pack",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Useful mixin pack for Riot.js",
   "files": [
     "dist"
