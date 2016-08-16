@@ -105,8 +105,44 @@ define(['exports'], function (exports) { 'use strict';
     }
   };
 
+  function normalize(selector) {
+    var re = /^[a-zA-Z]+(\-[a-zA-Z]+)*$/;
+    return selector.replace(re, function (m) {
+      return m + ", [data-is=\"" + m + "\"]";
+    });
+  }
+
+  var querySelector = {
+    init: function init() {
+      this.$ = this.querySelector;
+      this.$$ = this.querySelectorAll;
+    },
+    /**
+     * Gets Node or Tag by CSS selector
+     * @param { string } sel - CSS selector
+     * @param { boolean } flag - true for Tag
+     */
+    querySelector: function querySelector(sel, flag) {
+      var node = this.root.querySelector(normalize(sel));
+      return !flag ? node : node._tag || undefined;
+    },
+
+    /**
+     * Gets Nodes or Tags by CSS selector
+     * @param { string } sel - CSS selector
+     * @param { boolean } flag - true for Tag
+     */
+    querySelectorAll: function querySelectorAll(sel, flag) {
+      var nodes = this.root.querySelectorAll(normalize(sel));
+      return !flag ? nodes : Array.prototype.map.call(nodes, function (node) {
+        return node._tag || undefined;
+      });
+    }
+  };
+
   exports.domEvent = domEvent;
   exports.syncEvent = syncEvent;
   exports.parentScope = parentScope;
+  exports.querySelector = querySelector;
 
 });

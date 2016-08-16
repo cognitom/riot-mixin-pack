@@ -40,6 +40,7 @@ See more detail for each mixin:
 - [domEvent](dom-event/)
 - [syncEvent](sync-event/)
 - [parentScope](parent-scope/)
+- [querySelector](query-selector/)
 
 ## Development
 
